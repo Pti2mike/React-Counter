@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Header from "./components/Header";
+import Increment from "./components/Increment";
+import Decrement from "./components/Decrement";
+import Reset from "./components/Reset";
+import Footer from "./components/Footer";
+import "./App.css";
+
+import { library } from "@fortawesome/fontawesome-svg-core";
+
+import {
+  faCalculator,
+  faPlus,
+  faMinus,
+} from "@fortawesome/free-solid-svg-icons";
+library.add(faCalculator, faPlus, faMinus);
 
 function App() {
+  // Créer un état toujours dans App.js
+  // Destructuring du tableau ->
+  const [counter, setCounter] = useState(0);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <div className="count">
+        <Decrement value={counter} substract={setCounter} />
+        <div className="purple">
+          <p className="square">{counter}</p>
+          <Reset value={counter} reset={setCounter} />
+        </div>
+
+        <Increment value={counter} add={setCounter} />
+      </div>
+
+      <Footer />
+    </>
   );
 }
-
 export default App;
